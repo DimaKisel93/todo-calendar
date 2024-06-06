@@ -1,3 +1,5 @@
+A to-do list in the form of a calendar, where each day is presented as a list of tasks.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
