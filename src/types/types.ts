@@ -15,3 +15,14 @@ export interface Profile {
   name: string;
   days: Day[];
 }
+
+export type Action =
+  | { type: "SET_PROFILES"; profiles: Profile[] }
+  | { type: "ADD_TASK"; profileId: string; date: string; task: Task }
+  | { type: "REMOVE_TASK"; profileId: string; date: string; taskId: string }
+  | {
+      type: "TOGGLE_TASK_COMPLETION";
+      profileId: string;
+      date: string;
+      taskId: string;
+    };
