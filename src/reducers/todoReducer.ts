@@ -1,11 +1,17 @@
 import { Profile, Action } from "../types/types";
+import {
+  SET_PROFILES,
+  ADD_TASK,
+  REMOVE_TASK,
+  TOGGLE_TASK_COMPLETION,
+} from "../constants/actionTypes";
 
 const todoReducer = (state: Profile[], action: Action): Profile[] => {
   switch (action.type) {
-    case "SET_PROFILES":
+    case SET_PROFILES:
       return action.profiles;
 
-    case "ADD_TASK": {
+    case ADD_TASK: {
       return state.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {
@@ -21,7 +27,7 @@ const todoReducer = (state: Profile[], action: Action): Profile[] => {
       });
     }
 
-    case "REMOVE_TASK": {
+    case REMOVE_TASK: {
       return state.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {
@@ -37,7 +43,7 @@ const todoReducer = (state: Profile[], action: Action): Profile[] => {
       });
     }
 
-    case "TOGGLE_TASK_COMPLETION": {
+    case TOGGLE_TASK_COMPLETION: {
       return state.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {

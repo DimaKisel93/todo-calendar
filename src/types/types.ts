@@ -1,3 +1,10 @@
+import {
+  SET_PROFILES,
+  ADD_TASK,
+  REMOVE_TASK,
+  TOGGLE_TASK_COMPLETION,
+} from "../constants/actionTypes";
+
 export interface Task {
   id: string;
   title: string;
@@ -17,11 +24,16 @@ export interface Profile {
 }
 
 export type Action =
-  | { type: "SET_PROFILES"; profiles: Profile[] }
-  | { type: "ADD_TASK"; profileId: string; date: string; task: Task }
-  | { type: "REMOVE_TASK"; profileId: string; date: string; taskId: string }
+  | { type: typeof SET_PROFILES; profiles: Profile[] }
+  | { type: typeof ADD_TASK; profileId: string; date: string; task: Task }
   | {
-      type: "TOGGLE_TASK_COMPLETION";
+      type: typeof REMOVE_TASK;
+      profileId: string;
+      date: string;
+      taskId: string;
+    }
+  | {
+      type: typeof TOGGLE_TASK_COMPLETION;
       profileId: string;
       date: string;
       taskId: string;
