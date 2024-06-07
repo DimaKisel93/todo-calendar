@@ -1,6 +1,7 @@
 .app__header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   background-color: #80ccf0;
   padding: 1.25rem;
   color: white;
@@ -54,4 +55,13 @@
   font-size: 1rem;
   min-width: 7rem;
   text-align: center;
+}
+
+.profile-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-selector__title {
+  margin-bottom: 0.5rem;
 }

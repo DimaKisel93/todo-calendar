@@ -6,19 +6,13 @@ import { WeekNavigation } from "./WeekNavigation";
 
 export const Calendar = () => {
   const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
-  const { profiles } = useTodoContext();
+  const { selectedProfile } = useTodoContext();
 
-  if (profiles.length === 0) {
-    return <div>Loading...</div>;
-  }
-
-  const profile = profiles[0];
-
-  if (!profile || !profile.days) {
+  if (!selectedProfile || !selectedProfile.days) {
     return <div>No days available</div>;
   }
 
-  const weeks = groupDaysByWeek(profile.days);
+  const weeks = groupDaysByWeek(selectedProfile.days);
 
   return (
     <div className="calendar">

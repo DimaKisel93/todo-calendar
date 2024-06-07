@@ -1,18 +1,19 @@
-import { Profile, Action } from "../types/types";
+import { Action, TodoState } from "../types/types";
 import {
   SET_PROFILES,
   ADD_TASK,
   REMOVE_TASK,
   TOGGLE_TASK_COMPLETION,
+  SELECT_PROFILE,
 } from "../constants/actionTypes";
 
-const todoReducer = (state: Profile[], action: Action): Profile[] => {
+const todoReducer = (state: TodoState, action: Action): TodoState => {
   switch (action.type) {
     case SET_PROFILES:
-      return action.profiles;
+      return { ...state, profiles: action.profiles || state.profiles };
 
     case ADD_TASK: {
-      return state.map((profile) => {
+      const updatedProfiles = state.profiles.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {
           ...profile,
@@ -20,15 +21,16 @@ const todoReducer = (state: Profile[], action: Action): Profile[] => {
             if (day.date !== action.date) return day;
             return {
               ...day,
-              tasks: [...day.tasks, action.task],
+              tasks: action.task ? [...day.tasks, action.task] : [...day.tasks],
             };
           }),
         };
       });
+      return { ...state, profiles: updatedProfiles };
     }
 
     case REMOVE_TASK: {
-      return state.map((profile) => {
+      const updatedProfiles = state.profiles.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {
           ...profile,
@@ -41,10 +43,11 @@ const todoReducer = (state: Profile[], action: Action): Profile[] => {
           }),
         };
       });
+      return { ...state, profiles: updatedProfiles };
     }
 
     case TOGGLE_TASK_COMPLETION: {
-      return state.map((profile) => {
+      const updatedProfiles = state.profiles.map((profile) => {
         if (profile.id !== action.profileId) return profile;
         return {
           ...profile,
@@ -60,6 +63,14 @@ const todoReducer = (state: Profile[], action: Action): Profile[] => {
           }),
         };
       });
+      return { ...state, profiles: updatedProfiles };
+    }
+
+    case SELECT_PROFILE: {
+      const selectedProfile =
+        state.profiles.find((profile) => profile.id === action.profileId) ||
+        null;
+      return { ...state, selectedProfile };
     }
 
     default:

@@ -5,36 +5,29 @@ import {
   ReactNode,
   useEffect,
 } from "react";
-import { Profile, Task } from "../types/types";
+import { Profile, Task, TodoContextType, TodoState } from "../types/types";
 import todoReducer from "../reducers/todoReducer";
 import {
   SET_PROFILES,
   ADD_TASK,
   REMOVE_TASK,
   TOGGLE_TASK_COMPLETION,
+  SELECT_PROFILE,
 } from "../constants/actionTypes";
 import { mockProfiles } from "../mockData";
-
-interface TodoContextType {
-  profiles: Profile[];
-  addTask: (profileId: string, date: string, task: Task) => void;
-  removeTask: (profileId: string, date: string, taskId: string) => void;
-  toggleTaskCompletion: (
-    profileId: string,
-    date: string,
-    taskId: string,
-  ) => void;
-  setProfiles: (profiles: Profile[]) => void;
-}
-
-const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 interface TodoProviderProps {
   children: ReactNode;
 }
+export const initialState: TodoState = {
+  profiles: [],
+  selectedProfile: null,
+};
+
+const TodoContext = createContext<TodoContextType | undefined>(undefined);
 
 export const TodoProvider = ({ children }: TodoProviderProps) => {
-  const [profiles, dispatch] = useReducer(todoReducer, []);
+  const [state, dispatch] = useReducer(todoReducer, initialState);
 
   useEffect(() => {
     dispatch({ type: SET_PROFILES, profiles: mockProfiles });
@@ -60,14 +53,21 @@ export const TodoProvider = ({ children }: TodoProviderProps) => {
     dispatch({ type: SET_PROFILES, profiles });
   };
 
+  const selectProfile = (profileId: string) => {
+    dispatch({ type: SELECT_PROFILE, profileId });
+  };
+
   return (
     <TodoContext.Provider
       value={{
-        profiles,
+        profiles: state.profiles,
+        selectedProfile: state.selectedProfile,
         addTask,
         removeTask,
         toggleTaskCompletion,
         setProfiles,
+        selectProfile,
+        dispatch,
       }}
     >
       {children}
