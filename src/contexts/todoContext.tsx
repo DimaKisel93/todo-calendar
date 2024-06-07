@@ -1,4 +1,10 @@
-import { createContext, useReducer, useContext, ReactNode } from "react";
+import {
+  createContext,
+  useReducer,
+  useContext,
+  ReactNode,
+  useEffect,
+} from "react";
 import { Profile, Task } from "../types/types";
 import todoReducer from "../reducers/todoReducer";
 import {
@@ -7,6 +13,7 @@ import {
   REMOVE_TASK,
   TOGGLE_TASK_COMPLETION,
 } from "../constants/actionTypes";
+import { mockProfiles } from "../mockData";
 
 interface TodoContextType {
   profiles: Profile[];
@@ -28,6 +35,10 @@ interface TodoProviderProps {
 
 export const TodoProvider = ({ children }: TodoProviderProps) => {
   const [profiles, dispatch] = useReducer(todoReducer, []);
+
+  useEffect(() => {
+    dispatch({ type: SET_PROFILES, profiles: mockProfiles });
+  }, []);
 
   const addTask = (profileId: string, date: string, task: Task) => {
     dispatch({ type: ADD_TASK, profileId, date, task });
