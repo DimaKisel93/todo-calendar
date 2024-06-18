@@ -1,72 +1,74 @@
-import { Action, TodoState } from "../types/types";
-import {
-  SET_PROFILES,
-  ADD_TASK,
-  REMOVE_TASK,
-  TOGGLE_TASK_COMPLETION,
-  SELECT_PROFILE,
-} from "../constants/actionTypes";
+import { Action, TodoState } from '../types/types';
+import { ACTION_TYPES } from '../constants/actionTypes';
+import { findAndUpdateProfile, findAndUpdateDay } from '../utils/updateHelpers';
 
 const todoReducer = (state: TodoState, action: Action): TodoState => {
   switch (action.type) {
-    case SET_PROFILES:
+    case ACTION_TYPES.SET_PROFILES:
       return { ...state, profiles: action.profiles || state.profiles };
 
-    case ADD_TASK: {
-      const updatedProfiles = state.profiles.map((profile) => {
-        if (profile.id !== action.profileId) return profile;
-        return {
+    case ACTION_TYPES.ADD_TASK: {
+      const updatedProfiles = findAndUpdateProfile(
+        state.profiles,
+        action.profileId,
+        (profile) => ({
           ...profile,
-          days: profile.days.map((day) => {
-            if (day.date !== action.date) return day;
-            return {
-              ...day,
-              tasks: action.task ? [...day.tasks, action.task] : [...day.tasks],
-            };
-          }),
-        };
-      });
-      return { ...state, profiles: updatedProfiles };
+          days: findAndUpdateDay(profile.days, action.date, (day) => ({
+            ...day,
+            tasks: action.task ? [...day.tasks, action.task] : [...day.tasks],
+          })),
+        }),
+      );
+      const selectedProfile =
+        updatedProfiles.find(
+          (profile) => profile.id === state.selectedProfile?.id,
+        ) || null;
+      return { ...state, profiles: updatedProfiles, selectedProfile };
     }
 
-    case REMOVE_TASK: {
-      const updatedProfiles = state.profiles.map((profile) => {
-        if (profile.id !== action.profileId) return profile;
-        return {
+    case ACTION_TYPES.REMOVE_TASK: {
+      const updatedProfiles = findAndUpdateProfile(
+        state.profiles,
+        action.profileId,
+        (profile) => ({
           ...profile,
-          days: profile.days.map((day) => {
-            if (day.date !== action.date) return day;
-            return {
-              ...day,
-              tasks: day.tasks.filter((task) => task.id !== action.taskId),
-            };
-          }),
-        };
-      });
-      return { ...state, profiles: updatedProfiles };
+          days: findAndUpdateDay(profile.days, action.date, (day) => ({
+            ...day,
+            tasks: day.tasks.filter((task) => task.id !== action.taskId),
+          })),
+        }),
+      );
+      const selectedProfile =
+        updatedProfiles.find(
+          (profile) => profile.id === state.selectedProfile?.id,
+        ) || null;
+      return { ...state, profiles: updatedProfiles, selectedProfile };
     }
 
-    case TOGGLE_TASK_COMPLETION: {
-      const updatedProfiles = state.profiles.map((profile) => {
-        if (profile.id !== action.profileId) return profile;
-        return {
+    case ACTION_TYPES.TOGGLE_TASK_COMPLETION: {
+      const updatedProfiles = findAndUpdateProfile(
+        state.profiles,
+        action.profileId,
+        (profile) => ({
           ...profile,
-          days: profile.days.map((day) => {
-            if (day.date !== action.date) return day;
-            return {
-              ...day,
-              tasks: day.tasks.map((task) => {
-                if (task.id !== action.taskId) return task;
-                return { ...task, completed: !task.completed };
-              }),
-            };
-          }),
-        };
-      });
-      return { ...state, profiles: updatedProfiles };
+          days: findAndUpdateDay(profile.days, action.date, (day) => ({
+            ...day,
+            tasks: day.tasks.map((task) =>
+              task.id === action.taskId
+                ? { ...task, completed: !task.completed }
+                : task,
+            ),
+          })),
+        }),
+      );
+      const selectedProfile =
+        updatedProfiles.find(
+          (profile) => profile.id === state.selectedProfile?.id,
+        ) || null;
+      return { ...state, profiles: updatedProfiles, selectedProfile };
     }
 
-    case SELECT_PROFILE: {
+    case ACTION_TYPES.SELECT_PROFILE: {
       const selectedProfile =
         state.profiles.find((profile) => profile.id === action.profileId) ||
         null;

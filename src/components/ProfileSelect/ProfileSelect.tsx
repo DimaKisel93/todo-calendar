@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
-import { useTodoContext } from "../contexts/TodoContext";
+import { useEffect, useRef } from 'react';
+import { useTodoContext } from '../../contexts/TodoContext';
+import styles from './ProfileSelect.module.scss';
 
 export const ProfileSelector = () => {
   const { profiles, selectedProfile, selectProfile } = useTodoContext();
@@ -20,14 +21,14 @@ export const ProfileSelector = () => {
   };
 
   return (
-    <div className="profile-selector">
-      <label className="profile-selector__title" htmlFor="profile-selector">
-        Текущий пользователь:
+    <div className={styles.selector}>
+      <label className={styles.title} htmlFor="profile-selector">
+        Выбрать пользователя:
       </label>
       <select
         id="profile-selector"
         ref={selectRef}
-        value={selectedProfile?.id || ""}
+        value={selectedProfile?.id || ''}
         onChange={handleProfileChange}
       >
         {profiles.map((profile) => (

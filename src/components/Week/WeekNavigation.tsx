@@ -1,3 +1,5 @@
+import styles from './Week.module.scss';
+
 interface WeekNavigationProps {
   currentWeekIndex: number;
   setCurrentWeekIndex: (index: number) => void;
@@ -22,19 +24,19 @@ export const WeekNavigation = ({
   };
 
   return (
-    <nav className="week-navigation">
+    <nav className={styles.week_navigation}>
       <button
-        className="week-navigation__button"
+        className={styles.navigation_button}
         onClick={handlePreviousWeek}
         disabled={currentWeekIndex === 0}
       >
         Предыдущая неделя
       </button>
-      <span className="week-navigation__current-week">
+      <span className={styles.navigation_current_week}>
         Неделя {currentWeekIndex + 1} из {totalWeeks}
       </span>
       <button
-        className="week-navigation__button"
+        className={styles.navigation_button}
         onClick={handleNextWeek}
         disabled={currentWeekIndex === totalWeeks - 1}
       >

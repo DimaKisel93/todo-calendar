@@ -1,10 +1,4 @@
-import {
-  SET_PROFILES,
-  ADD_TASK,
-  REMOVE_TASK,
-  TOGGLE_TASK_COMPLETION,
-  SELECT_PROFILE,
-} from "../constants/actionTypes";
+import { ACTION_TYPES } from '../constants/actionTypes';
 
 export interface Task {
   id: string;
@@ -43,33 +37,33 @@ export interface TodoContextType extends TodoState {
 }
 
 type SetProfilesAction = {
-  type: typeof SET_PROFILES;
+  type: typeof ACTION_TYPES.SET_PROFILES;
   profiles: Profile[];
 };
 
 type AddTaskAction = {
-  type: typeof ADD_TASK;
+  type: typeof ACTION_TYPES.ADD_TASK;
   profileId: string;
   date: string;
   task: Task;
 };
 
 type RemoveTaskAction = {
-  type: typeof REMOVE_TASK;
+  type: typeof ACTION_TYPES.REMOVE_TASK;
   profileId: string;
   date: string;
   taskId: string;
 };
 
 type ToggleTaskCompletionAction = {
-  type: typeof TOGGLE_TASK_COMPLETION;
+  type: typeof ACTION_TYPES.TOGGLE_TASK_COMPLETION;
   profileId: string;
   date: string;
   taskId: string;
 };
 
 type SelectProfileAction = {
-  type: typeof SELECT_PROFILE;
+  type: typeof ACTION_TYPES.SELECT_PROFILE;
   profileId: string;
 };
 

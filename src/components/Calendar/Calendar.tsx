@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { useTodoContext } from "../contexts/TodoContext";
-import { Week } from "./Week";
-import { groupDaysByWeek } from "../utils/groupDaysByWeek";
-import { WeekNavigation } from "./WeekNavigation";
+import { useState } from 'react';
+import { useTodoContext } from '../../contexts/TodoContext';
+import { Week } from '../Week/Week';
+import { groupDaysByWeek } from '../../utils/groupDaysByWeek';
+import { WeekNavigation } from '../Week/WeekNavigation';
+import styles from './Calendar.module.scss';
 
 export const Calendar = () => {
   const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
@@ -15,7 +16,7 @@ export const Calendar = () => {
   const weeks = groupDaysByWeek(selectedProfile.days);
 
   return (
-    <div className="calendar">
+    <div className={styles.calendar}>
       <WeekNavigation
         currentWeekIndex={currentWeekIndex}
         setCurrentWeekIndex={setCurrentWeekIndex}

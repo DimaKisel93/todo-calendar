@@ -1,4 +1,4 @@
-import { Day } from "../types/types";
+import { Day } from '../types/types';
 
 export const groupDaysByWeek = (days: Day[]): Day[][] => {
   const weeks: Day[][] = [];
