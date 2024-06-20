@@ -1,4 +1,4 @@
-A to-do list in the form of a calendar, where each day is presented as a list of tasks.
+A to-do list in the form of a calendar, where each day is presented as a list of tasks. The application is written in React and covered with tests. The application uses a third-party isDayOff api to determine all weekend days in a year and highlights weekends on the calendar
 
 # Getting Started with Create React App
 

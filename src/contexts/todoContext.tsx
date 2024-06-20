@@ -16,18 +16,24 @@ import { DAYS_OFF } from '../constants/constants';
 
 interface TodoProviderProps {
   children: ReactNode;
+  initialValue?: TodoState;
 }
 export const initialState: TodoState = {
   profiles: [],
   selectedProfile: null,
 };
 
-const TodoContext = createContext<TodoContextType | undefined>(undefined);
+export const TodoContext = createContext<TodoContextType | undefined>(
+  undefined,
+);
 const fetchHttpClient = new FetchHttpClient();
 const dataService = new DataService(fetchHttpClient, 'ru');
 
-export const TodoProvider = ({ children }: TodoProviderProps) => {
-  const [state, dispatch] = useReducer(todoReducer, initialState);
+export const TodoProvider = ({
+  children,
+  initialValue = initialState,
+}: TodoProviderProps) => {
+  const [state, dispatch] = useReducer(todoReducer, initialValue);
 
   useEffect(() => {
     const fetchProfiles = async () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Day as DayType } from '../../types/types';
 import { Day } from '../Day/Day';
-import { Modal } from '../TaskModal/TaskModal';
+import { TaskModal } from '../TaskModal/TaskModal';
 import styles from './Week.module.scss';
 
 interface WeekProps {
@@ -41,7 +41,7 @@ export const Week = ({ days }: WeekProps) => {
         <Day key={day.date} day={day} onClick={() => openTaskModal(day)} />
       ))}
       {isModalOpen && selectedDay && (
-        <Modal day={selectedDay} handleTaskModalClose={closeTaskModal} />
+        <TaskModal day={selectedDay} handleTaskModalClose={closeTaskModal} />
       )}
     </section>
   );

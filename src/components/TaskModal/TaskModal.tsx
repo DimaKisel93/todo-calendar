@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useTodoContext } from '../../contexts/TodoContext';
 import { Day, Task } from '../../types/types';
 import { formatDate } from '../../utils/formatDate';
 import styles from './TaskModal.module.scss';
 
-interface ModalProps {
+interface TaskModalProps {
   day: Day;
   handleTaskModalClose: () => void;
 }
 
-export const Modal: React.FC<ModalProps> = ({ day, handleTaskModalClose }) => {
+export const TaskModal = ({ day, handleTaskModalClose }: TaskModalProps) => {
   const { addTask, removeTask, toggleTaskCompletion, selectedProfile } =
     useTodoContext();
   const [newTaskTitle, setNewTaskTitle] = useState('');
