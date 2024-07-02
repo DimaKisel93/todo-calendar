@@ -1,1 +1,1 @@
-export const DAYS_OFF = ['1', '4'];
+export const DAYS_OFF = ["1", "4"];
