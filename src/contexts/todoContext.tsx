@@ -4,15 +4,15 @@ import {
   useContext,
   ReactNode,
   useEffect,
-} from 'react';
-import { Day, Profile, Task, TodoContextType, TodoState } from '../types/types';
-import todoReducer from '../reducers/todoReducer';
-import { ACTION_TYPES } from '../constants/actionTypes';
-import { mockProfiles } from '../mockData';
-import { DataService } from '../api/dataService';
-import { FetchHttpClient } from '../api/fetchHttpClient';
-import { formatApiDate, getDayOfYear } from '../utils/formatDate';
-import { DAYS_OFF } from '../constants/constants';
+} from "react";
+import { Day, Profile, Task, TodoContextType, TodoState } from "../types/types";
+import todoReducer from "../reducers/todoReducer";
+import { ACTION_TYPES } from "../constants/actionTypes";
+import { mockProfiles } from "../mockData";
+import { DataService } from "../api/dataService";
+import { FetchHttpClient } from "../api/fetchHttpClient";
+import { formatApiDate, getDayOfYear } from "../utils/formatDate";
+import { DAYS_OFF } from "../constants/constants";
 
 interface TodoProviderProps {
   children: ReactNode;
@@ -27,7 +27,7 @@ export const TodoContext = createContext<TodoContextType | undefined>(
   undefined,
 );
 const fetchHttpClient = new FetchHttpClient();
-const dataService = new DataService(fetchHttpClient, 'ru');
+const dataService = new DataService(fetchHttpClient, "ru");
 
 export const TodoProvider = ({
   children,
@@ -56,7 +56,7 @@ export const TodoProvider = ({
           profiles: profilesWithHolidays,
         });
       } catch (error) {
-        console.error('Error fetching profiles:', error);
+        console.error("Error fetching profiles:", error);
       }
     };
 
@@ -113,7 +113,7 @@ export const TodoProvider = ({
 export const useTodoContext = () => {
   const context = useContext(TodoContext);
   if (!context) {
-    throw new Error('useTodoContext must be used within a TodoProvider');
+    throw new Error("useTodoContext must be used within a TodoProvider");
   }
   return context;
 };

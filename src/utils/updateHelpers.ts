@@ -1,4 +1,4 @@
-import { Profile, Day } from '../types/types';
+import { Profile, Day } from "../types/types";
 
 export const findAndUpdateProfile = (
   profiles: Profile[],

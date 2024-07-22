@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { useTodoContext } from '../../contexts/TodoContext';
-import { Day, Task } from '../../types/types';
-import { formatDate } from '../../utils/formatDate';
-import styles from './TaskModal.module.scss';
+import { useState } from "react";
+import { useTodoContext } from "../../contexts/TodoContext";
+import { Day, Task } from "../../types/types";
+import { formatDate } from "../../utils/formatDate";
+import styles from "./TaskModal.module.scss";
 
 interface TaskModalProps {
   day: Day;
@@ -12,7 +12,7 @@ interface TaskModalProps {
 export const TaskModal = ({ day, handleTaskModalClose }: TaskModalProps) => {
   const { addTask, removeTask, toggleTaskCompletion, selectedProfile } =
     useTodoContext();
-  const [newTaskTitle, setNewTaskTitle] = useState('');
+  const [newTaskTitle, setNewTaskTitle] = useState("");
 
   const handleAddTask = () => {
     if (selectedProfile && newTaskTitle.trim()) {
@@ -22,7 +22,7 @@ export const TaskModal = ({ day, handleTaskModalClose }: TaskModalProps) => {
         completed: false,
       };
       addTask(selectedProfile.id, day.date, newTask);
-      setNewTaskTitle('');
+      setNewTaskTitle("");
     }
   };
 

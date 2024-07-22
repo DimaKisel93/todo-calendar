@@ -1,4 +1,4 @@
-import styles from './Week.module.scss';
+import styles from "./Week.module.scss";
 
 interface WeekNavigationProps {
   currentWeekIndex: number;

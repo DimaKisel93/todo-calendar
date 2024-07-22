@@ -1,16 +1,36 @@
-import 'destyle.css';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import "destyle.css";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { LoginPage } from "./pages/LoginPage/LoginPage";
+import { HomePage } from "./pages/HomePage/HomePage";
+import { AuthorizedPage } from "./pages/AuthorizedPage/AuthorizedPage";
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path="login" element={<LoginPage />}></Route>
+      <Route path="/" element={<AuthorizedPage />}>
+        <Route path="/" index element={<HomePage />}></Route>
+      </Route>
+    </Route>,
+  ),
+);
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement,
+  document.getElementById("root") as HTMLElement,
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>,
 );
 

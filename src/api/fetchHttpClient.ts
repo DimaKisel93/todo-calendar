@@ -15,9 +15,9 @@ export class FetchHttpClient implements HttpClient {
 
   async post<T, U>(url: string, data: U): Promise<T> {
     const response = await fetch(url, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });

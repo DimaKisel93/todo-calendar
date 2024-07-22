@@ -1,14 +1,14 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { TaskModal } from './TaskModal';
-import { Day } from '../../types/types';
-import { TodoProvider } from '../../contexts/TodoContext';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { TaskModal } from "./TaskModal";
+import { Day } from "../../types/types";
+import { TodoProvider } from "../../contexts/TodoContext";
 
 const day: Day = {
-  date: '2024-06-18',
+  date: "2024-06-18",
   tasks: [
-    { id: '1', title: 'Task 1', completed: false },
-    { id: '2', title: 'Task 2', completed: true },
+    { id: "1", title: "Task 1", completed: false },
+    { id: "2", title: "Task 2", completed: true },
   ],
   isDayOff: false,
 };
@@ -17,8 +17,8 @@ const renderWithProvider = (ui: React.ReactElement) => {
   return render(<TodoProvider>{ui}</TodoProvider>);
 };
 
-describe('TaskModal component', () => {
-  test('renders tasks', () => {
+describe("TaskModal component", () => {
+  test("renders tasks", () => {
     renderWithProvider(
       <TaskModal
         day={day}
@@ -32,7 +32,7 @@ describe('TaskModal component', () => {
     expect(screen.getByText(/Task 2/)).toBeInTheDocument();
   });
 
-  test('adds a new task', () => {
+  test("adds a new task", () => {
     renderWithProvider(
       <TaskModal
         day={day}
@@ -43,14 +43,14 @@ describe('TaskModal component', () => {
     );
 
     fireEvent.change(screen.getByPlaceholderText(/Новое задание/), {
-      target: { value: 'New Task' },
+      target: { value: "New Task" },
     });
     fireEvent.click(screen.getByText(/Новое задание/));
 
     expect(screen.getByText(/New Task/)).toBeInTheDocument();
   });
 
-  test('removes a task', () => {
+  test("removes a task", () => {
     renderWithProvider(
       <TaskModal
         day={day}
@@ -68,7 +68,7 @@ describe('TaskModal component', () => {
     }
   });
 
-  test('toggles task completion', () => {
+  test("toggles task completion", () => {
     renderWithProvider(
       <TaskModal
         day={day}
@@ -83,7 +83,7 @@ describe('TaskModal component', () => {
     expect(task1Checkbox).toBeChecked();
   });
 
-  test('closes modal on close button click', () => {
+  test("closes modal on close button click", () => {
     const handleTaskModalClose = jest.fn();
     renderWithProvider(
       <TaskModal day={day} handleTaskModalClose={handleTaskModalClose} />,

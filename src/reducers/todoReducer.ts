@@ -1,6 +1,6 @@
-import { Action, TodoState } from '../types/types';
-import { ACTION_TYPES } from '../constants/actionTypes';
-import { findAndUpdateProfile, findAndUpdateDay } from '../utils/updateHelpers';
+import { Action, TodoState } from "../types/types";
+import { ACTION_TYPES } from "../constants/actionTypes";
+import { findAndUpdateProfile, findAndUpdateDay } from "../utils/updateHelpers";
 
 const todoReducer = (state: TodoState, action: Action): TodoState => {
   switch (action.type) {

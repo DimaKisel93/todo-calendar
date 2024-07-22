@@ -1,11 +1,11 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import { ProfileSelector } from './ProfileSelect';
-import { TodoContext } from '../../contexts/TodoContext';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import { ProfileSelector } from "./ProfileSelect";
+import { TodoContext } from "../../contexts/TodoContext";
 
 const mockProfiles = [
-  { id: '1', name: 'User 1', days: [] },
-  { id: '2', name: 'User 2', days: [] },
+  { id: "1", name: "User 1", days: [] },
+  { id: "2", name: "User 2", days: [] },
 ];
 
 const mockTodoContext = {
@@ -25,28 +25,28 @@ const renderWithProvider = (ui: React.ReactElement) => {
   );
 };
 
-describe('ProfileSelector component', () => {
-  test('renders profile selector with options', () => {
+describe("ProfileSelector component", () => {
+  test("renders profile selector with options", () => {
     renderWithProvider(<ProfileSelector />);
 
     expect(screen.getByLabelText(/выбрать пользователя/i)).toBeInTheDocument();
-    expect(screen.getByText('User 1')).toBeInTheDocument();
-    expect(screen.getByText('User 2')).toBeInTheDocument();
+    expect(screen.getByText("User 1")).toBeInTheDocument();
+    expect(screen.getByText("User 2")).toBeInTheDocument();
   });
 
-  test('selects the first profile by default if none is selected', () => {
+  test("selects the first profile by default if none is selected", () => {
     renderWithProvider(<ProfileSelector />);
 
-    expect(mockTodoContext.selectProfile).toHaveBeenCalledWith('1');
+    expect(mockTodoContext.selectProfile).toHaveBeenCalledWith("1");
   });
 
-  test('calls selectProfile when a different profile is selected', () => {
+  test("calls selectProfile when a different profile is selected", () => {
     renderWithProvider(<ProfileSelector />);
 
     fireEvent.change(screen.getByLabelText(/выбрать пользователя/i), {
-      target: { value: '2' },
+      target: { value: "2" },
     });
 
-    expect(mockTodoContext.selectProfile).toHaveBeenCalledWith('2');
+    expect(mockTodoContext.selectProfile).toHaveBeenCalledWith("2");
   });
 });

@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Day as DayType } from '../../types/types';
-import { Day } from '../Day/Day';
-import { TaskModal } from '../TaskModal/TaskModal';
-import styles from './Week.module.scss';
+import { useState, useEffect } from "react";
+import { Day as DayType } from "../../types/types";
+import { Day } from "../Day/Day";
+import { TaskModal } from "../TaskModal/TaskModal";
+import styles from "./Week.module.scss";
 
 interface WeekProps {
   days: DayType[];
